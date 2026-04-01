@@ -1,0 +1,53 @@
+# Replacement for IBJts/source/cppclient/client/CMakeLists.txt:
+# - Adds protobufUnix sources and include path (required for Linux; upstream glob omits them).
+# - Links against CMake's Protobuf imported target.
+
+find_package(Protobuf REQUIRED)
+
+file(GLOB SOURCES "*.cpp")
+file(GLOB PROTO_SOURCES "protobufUnix/*.cc")
+file(GLOB HEADERS "*.h")
+file(GLOB PROTO_HEADERS "protobufUnix/*.h")
+
+set(twsapi_VERSION 9.79.02)
+add_library(twsapi SHARED ${SOURCES} ${PROTO_SOURCES})
+
+if(WIN32)
+    target_link_libraries(twsapi PUBLIC ws2_32)
+endif()
+
+if(MSVC)
+    target_compile_options(twsapi PRIVATE /W3)
+else()
+    target_compile_options(twsapi PRIVATE -Wall -Wextra -pedantic -Wno-unused-parameter)
+endif()
+
+target_include_directories(
+    twsapi
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/protobufUnix>
+        $<INSTALL_INTERFACE:include/twsapi>
+)
+target_link_libraries(twsapi PUBLIC protobuf::libprotobuf)
+
+set_target_properties(
+    twsapi
+    PROPERTIES
+        PREFIX "lib"
+        DEBUG_POSTFIX "d"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        PUBLIC_HEADER "${HEADERS}"
+)
+
+install(
+    TARGETS twsapi
+    EXPORT twsapi-targets
+    PUBLIC_HEADER DESTINATION include/twsapi
+    LIBRARY DESTINATION lib
+)
+install(
+    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/protobufUnix/"
+    DESTINATION include/twsapi/protobufUnix
+    FILES_MATCHING PATTERN "*.h"
+)

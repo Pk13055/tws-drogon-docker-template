@@ -1,0 +1,34 @@
+# Version control
+.git
+.gitignore
+
+# IDE and Editor files
+.idea/
+.vscode/
+.vs/
+*.swp
+*.user
+
+# C++ Build Artifacts and Temporary Files
+.build/
+build/
+build*/
+cmake-build-*/
+cmake-out/
+.cache/
+*.o
+*.so
+*.a
+
+# Executables (adjust based on your project's naming)
+*.exe
+app_name
+
+# Documentation and logs
+docs/
+*.log
+tmp/
+
+# Local SDK extract (image builds from the zip + cmake/tws-sdk overlay instead)
+temp/
+

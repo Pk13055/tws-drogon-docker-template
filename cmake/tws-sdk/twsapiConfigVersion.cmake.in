@@ -1,0 +1,2 @@
+# Shipped with this repo: the official macOS/Unix TWS API zip omits this template.
+set(PACKAGE_VERSION "9.79.02")

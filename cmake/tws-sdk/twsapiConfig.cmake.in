@@ -1,0 +1,2 @@
+# Shipped with this repo: the official macOS/Unix TWS API zip omits these templates.
+include("${CMAKE_CURRENT_LIST_DIR}/twsapi-targets.cmake")
