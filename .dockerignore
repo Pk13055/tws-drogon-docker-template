@@ -1,34 +1,62 @@
+# -----------------------------
 # Version control
+# -----------------------------
 .git
 .gitignore
 
-# IDE and Editor files
+# -----------------------------
+# IDE / Editor
+# -----------------------------
 .idea/
 .vscode/
 .vs/
 *.swp
+*.swo
 *.user
 
-# C++ Build Artifacts and Temporary Files
-.build/
+# -----------------------------
+# Build artifacts (CRITICAL)
+# -----------------------------
 build/
 build*/
 cmake-build-*/
 cmake-out/
+.build/
 .cache/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+
+# Object / binary files
 *.o
+*.obj
 *.so
 *.a
+*.out
 
-# Executables (adjust based on your project's naming)
+# Executables
 *.exe
 app_name
 
-# Documentation and logs
-docs/
+# -----------------------------
+# Logs / temp
+# -----------------------------
 *.log
 tmp/
+uploads/tmp/
 
-# Local SDK extract (image builds from the zip + cmake/tws-sdk overlay instead)
+# -----------------------------
+# Docs (optional — include if not needed in image)
+# -----------------------------
+docs/
+
+# -----------------------------
+# OS junk
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Local SDK / experiments
+# -----------------------------
 temp/
-

@@ -1,6 +1,11 @@
 # Replacement for IBJts/source/cppclient/client/CMakeLists.txt:
 # - Adds protobufUnix sources and include path (required for Linux; upstream glob omits them).
 # - Links against CMake's Protobuf imported target.
+#
+# Intel BID (__bid64_* from Decimal.cpp): IB’s lib/libbid.a is not PIC; Debian’s
+# libbidgcc000.a is also not suitable to embed in a shared lib. Leave those
+# symbols undefined in libtwsapi.so and resolve them at load time from the main
+# executable (see tws/CMakeLists.txt: libbidgcc000 + -rdynamic).
 
 find_package(Protobuf REQUIRED)
 
